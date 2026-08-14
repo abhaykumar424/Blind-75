@@ -1,0 +1,18 @@
+class Solution {
+public:
+    vector<int> dp;
+    int maxi(vector<int> nums, int i) {
+        if (i >= nums.size())
+            return 0;
+        if (dp[i] != -1)
+            return dp[i];
+
+        int rob = nums[i] + maxi(nums, i + 2);
+        int skip = maxi(nums, i + 1);
+        return dp[i] = max(rob, skip);
+    }
+    int rob(vector<int>& nums) {
+        dp.resize(nums.size(), -1);
+        return maxi(nums, 0);
+    }
+};
